@@ -5,7 +5,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  
-	  <meta charset="utf-8">
+	  
       <meta http-equiv="Content-Type" content="text/html">
       <meta name="description" content="Онлайн конвертер валют" />  <!-- Currency exchange rate data and currency conversion-->
       <meta name="keywords" content="Currency calculator, exchange rate data and currency conversion">
@@ -46,9 +46,10 @@
          <h1 id="h1Text">
              <img id ="wLogo" class="shrink-large" src="">	 
 		     <span id="textChange" class="textShadow"> Chart</span> 
-			 <i class="	fa fa-briefcase" style="font-size:59px"></i> 
+			 &nbsp;
+			 <i class="	fa fa-briefcase" style="font-size:59px"></i> <i class="fa fa-bar-chart-o" style="font-size:40px"></i>
 		     
-			 <img id ="wLogo2" src="" style="width:44%;"/>
+			<!-- <img id ="wLogo2" src="" style="width:44%;"/>-->
 			 <br>
 			 
 			 
@@ -69,29 +70,57 @@
 		   
 		   
 		         <div class="col-sm-12 col-xs-12 myShadow mainX head-style" style="background-color:;" id="targerDiv">
-				     <i class="	fa fa-dollar" style="font-size:40px"></i>&nbsp;&nbsp;<i class="fa fa-toggle-on" style="font-size:40px"></i>
+				     <i class="fa fa-bar-chart-o" style="font-size:40px"></i>&nbsp;&nbsp;<i class="fa fa-toggle-on" style="font-size:40px"></i>
 				 
-				 	<button class="add_form_field">Add New Field &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
+				 	<!--<button class="add_form_field">Add New Field &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>-->
 
-				 
+				     <!----------------------------- FORM --------------------->
 			         <form class="form-inline" action="" id="formN">
 					 
+					 <!--
                           <div class="form-group">
-                              <label for="sum">Text</label>
-                              <input type="text"  class="form-control" id="" name="">
+                              <label for="sum">&nbsp;Text</label>
+                              <input type="text"  class="form-control">
                           </div>
-						  
+					-->  
+						 <!--Input fields, text, number--> 
+					<!--
                          <div class="form-group">
-                              <label for="sum">Number</label>
-                              <input type="number" min="1" value="1" class="form-control" id="" name="">
-                         </div>
+                              <label for="sum">&nbsp;Number</label>
+                              <input type="number" class="form-control">
+                         </div><br>--><!-- br is a must to maintain symetri-->
+					 	 
 						 
-						 <button class="btn addButton" id="addButton"><i class="fa fa-plus"></i> More</button>
+						 
+						 <!--<button class="btn addButton" id="addButton"><i class="fa fa-plus"></i> More</button>-->
 						  
-					      <br><br><br>
-                          <input id ="getFormSerialize" type="button" class="btn btn-default " style="font-size:20px" value="OK">
-						  <br><br><br>
+					      <br><!-- br is a must to maintain symetri-->
+                          <!--<input id ="getFormSerialize" type="button" class="btn btn-default " style="font-size:20px" value="OK">-->
+						  <!--<br><br><br>-->
                       </form>
+					  
+					 <!-- button to add fields, inputs--> 
+					 <button class="add_form_field">Add New Field &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>
+					 <br><br><br>
+
+					 
+					 <!-- SELECT type of chart-->
+					 <div class="form-group">
+                         <label for="chartType">Type:</label>
+                         <select class="form-control" id="chartType">
+                             <option  value="bar" selected="selected">Bar</option>
+                             <option  value="line">    Line     </option>
+							 <option  value="pie">     Pie      </option> 
+							 <option  value="doughnut">Doughnut </option>
+							 <option  value="radar">Radar</option>
+							 <!--<option  value="bubble">Bubble</option>-->
+                         </select>
+                     </div>
+
+
+				     <!-- button to draw Chart--> 
+				     <input id ="getFormSerialize" type="button" class="btn btn-default " style="font-size:20px" value="Draw Chart">
+
 				   
 			     </div> <!--END  <div class="col-sm-4 col-xs-12 myShadow mainX-->
 				
@@ -101,7 +130,9 @@
 				  
 				  
 				  <!-- Canvas for Chart.js Library-->
-				  <canvas id="popChart" width="600" height="400"></canvas>
+				  <div class="col-sm-12 col-xs-12 myShadow"><!-- without this BS div it causes div horizontal overlap-->
+				      <canvas id="popChart" style="width:;" height="200px"></canvas>
+			      </div>
 
 				  
 				 
@@ -113,11 +144,11 @@
     	 </div><!-- /.wrapper -->
       <!--</div>-->   <!-- /.item -->
 	  
-	     <div style="height:277px;"></div><!-- just to press footer-->
+	     <div style="height:277px;width:90%;"></div><!-- just to press footer-->
                 
 
        
-		<!---------PAGE LOADER SPINNER START, visible while the page is loading, uses js/main_layout.js, css is in yii2_mine.css--------------->
+		<!--------- PAGE LOADER SPINNER START, visible while the page is loading, uses js/main_layout.js, css is in yii2_mine.css --------------->
 	    <div id="overlay" class="col-sm-12 col-xs-12 myShadow">
 		    <center>
 		        <img src="images/spinner.gif" alt="" style="width:33%;"/>
@@ -151,13 +182,13 @@
   
   
   
-       <!-----------------  Button to change Style theme------------------------->
+       <!-----------------  Button to change Style theme ------------------------->
 	   <input type="button" class="btn" value=">>" id="changeStyle" style="position:absolute;top:0px;left:0px;" title="click to change theme"/>
 	   <!-----------------  Button to change Style theme------------------------->
   
       
 	   <!-----------------  Button with info------------------------------------>
-	   <!--data-toggle="modal" data-target="#myModalZ" is a Bootstrap trigger---->
+	   <!-- data-toggle="modal" data-target="#myModalZ" is a Bootstrap trigger ---->
 	   <button data-toggle="modal" data-target="#myModalZ" class="btn" style="font-size:17px; position:absolute;top:0px;right:0px;" title="click to see info">
 	       &nbsp;<i class="fa fa-info-circle"></i>&nbsp;
 	   </button>    
@@ -179,8 +210,13 @@
                   </div>
                   <div class="modal-body">
 				      <center>
-					  <p> Chart</p>
-				      <img src="images/data.jpg" alt=""/>
+					  <h2> Chart</h2>
+				      <img src="images/data.jpg" alt="" style="width:60%;"/>
+					  <h3> How to draw your chart.</h3>
+					  <p> 1.Click "Add new Fields" button to add up to 19 fields.</p>
+					  <p> 2.Fill each field with text and number values.</p>
+					  <p> 3.Select type of chart you would like to use.</p>
+					  <p> 4.Click "Draw chart" button.</p>
 					  </center>
                   </div>
                   <div class="modal-footer">
@@ -213,7 +249,7 @@
   
  
  <!----------------------- FB API  share---------------------->
- <center><br><br>
+ <br><br>
   
  <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
