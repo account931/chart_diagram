@@ -3,6 +3,18 @@ Draw your custom Chart
 1. Uses Library Chart.js to draw a chart
 2. Uses Library Filesaver.js to download jpeg img
 
+-------------------------
+
+MEGA ERRORS FIX:
+1.Missing minimal column in chart-> adding  { options: { scales: {yAxes: [{ ticks: { beginAtZero:true} to {var barChart = new Chart()}
+2. On chart hover old data appears with old chart type-> clear the <div> with <canvas> and innerHTML <canvas> there agian
+		document.getElementById("chartContainer").innerHTML = '&nbsp;';
+        document.getElementById("chartContainer").innerHTML = ' <canvas id="popChart"  height="200px"></canvas>';
+
+
+----------------------------------------
+
+
 1. How to create a chart:
 // create/initialize Object {new Chart} from Library {Chart.js}, which draws the chart
 	      var barChart = new Chart(popCanvas, {
