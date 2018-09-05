@@ -1,21 +1,22 @@
 <!DOCTYPE html>
   <html>
     <head>
-      <title>Live chart</title>
+      <title>On-line chart</title>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  
 	  
       <meta http-equiv="Content-Type" content="text/html">
-      <meta name="description" content="Онлайн конвертер валют" />  <!-- Currency exchange rate data and currency conversion-->
-      <meta name="keywords" content="Currency calculator, exchange rate data and currency conversion">
+      <meta name="description" content="Create an on-line chart" />  <!-- Create an on-line chart-->
+      <meta name="keywords" content="Create an on-line chart">
 
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="js/myChart.js"></script><!--  Core Currency JS-->  
 	  <script src="js/changeStyleTheme.js"></script><!-- Theme changer JS-->  
-	  <script src="library/Chart.min.js"></script><!-- JS Chart library-->  
+	  <script src="library/Chart_library/Chart.min.js"></script><!-- JS Chart library-->  
+	  <script src="library/FileSaver_libary/FileSaver.js"></script><!-- JS FileSaver library-->
 	  
 	  
 	 
@@ -45,7 +46,7 @@
 	   
          <h1 id="h1Text">
              <img id ="wLogo" class="shrink-large" src="">	 
-		     <span id="textChange" class="textShadow"> Chart</span> 
+		     <span id="textChange" class="textShadow">On-line live Chart</span> 
 			 &nbsp;
 			 <i class="	fa fa-briefcase" style="font-size:59px"></i> <i class="fa fa-bar-chart-o" style="font-size:40px"></i>
 		     
@@ -71,10 +72,14 @@
 		   
 		         <div class="col-sm-12 col-xs-12 myShadow mainX head-style" style="background-color:;" id="targerDiv">
 				     <i class="fa fa-bar-chart-o" style="font-size:40px"></i>&nbsp;&nbsp;<i class="fa fa-toggle-on" style="font-size:40px"></i>
+					 Chart Title<br> <input type="text"   id="chartName" class="textBlack">
 				 
 				 	<!--<button class="add_form_field">Add New Field &nbsp; <span style="font-size:16px; font-weight:bold;">+ </span></button>-->
+					
+					
+					
 
-				     <!----------------------------- FORM --------------------->
+				     <!----------------------------------------- FORM ---------------------------------------------->
 			         <form class="form-inline" action="" id="formN">
 					 
 					 <!--
@@ -112,7 +117,8 @@
                              <option  value="line">    Line     </option>
 							 <option  value="pie">     Pie      </option> 
 							 <option  value="doughnut">Doughnut </option>
-							 <option  value="radar">Radar</option>
+							 <option  value="radar">Radar</option>  horizontalBar
+							 <option  value="horizontalBar">HorizontalBar</option>
 							 <!--<option  value="bubble">Bubble</option>-->
                          </select>
                      </div>
@@ -126,11 +132,13 @@
 				
 				
 				
-				
+				  <!-- Click to save Canvas chart to JPEG-->
+				  <div class="col-sm-12 col-xs-12" id="jpegSaveButtonContainer"><!-- without this BS div it causes div horizontal overlap-->   
+			      </div>
 				  
 				  
 				  <!-- Canvas for Chart.js Library-->
-				  <div class="col-sm-12 col-xs-12 myShadow"><!-- without this BS div it causes div horizontal overlap-->
+				  <div class="col-sm-12 col-xs-12 myShadow" id="chartContainer"><!-- without this BS div it causes div horizontal overlap-->
 				      <canvas id="popChart" style="width:;" height="200px"></canvas>
 			      </div>
 
@@ -213,11 +221,14 @@
 					  <h2> Chart</h2>
 				      <img src="images/data.jpg" alt="" style="width:60%;"/>
 					  <h3> How to draw your chart.</h3>
-					  <p> 1.Click "Add new Fields" button to add up to 19 fields.</p>
-					  <p> 2.Fill each field with text and number values.</p>
-					  <p> 3.Select type of chart you would like to use.</p>
-					  <p> 4.Click "Draw chart" button.</p>
 					  </center>
+					  <p> 1.Select title of your chart .</p>
+					  <p> 2.Click "Add new Fields" button to add up to 19 fields.</p>
+					  <p> 3.Fill each field with text and number values.</p>
+					  <p> 4.Select type of chart you would like to use.</p>
+					  <p> 5.Click "Draw chart" button.</p>
+					  <p> 6.If you need, you can save the chart as jpeg with "Save image" button.</p>
+					  
                   </div>
                   <div class="modal-footer">
                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

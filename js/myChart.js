@@ -24,7 +24,7 @@ $(document).ready(function(){
 	
 	
 	
-	// Get Form values + Run Chart  
+	// Get Form values + Run Chart  + add button to save jpeg
 	$(document).on("click", '#getFormSerialize', function() {   // this  click  is  used  to   react  to  newly generated cicles;
 	    getFormValuesToArray_andRunChart(); //
 		//drawChart();
@@ -32,7 +32,35 @@ $(document).ready(function(){
 	}); 
 	
 	
+	
+	// Download JPEG  on button click
+	// **************************************************************************************
+    // **************************************************************************************
+    //                                                                                     **
+	
+	$(document).on("click", '#downloadLnk', function() {   // this  click  is  used  to   react  to  newly generated cicles;
+	   if (confirm("Sure to download image?")) {
+	       //Using Filesaver Library
+	       var canvas = document.getElementById("popChart"), ctx = canvas.getContext("2d");
+           // draw to canvas...
+           canvas.toBlob(function(blob) {
+           saveAs(blob, "chartMine.jpeg");
+           }); 
+	       //END Using Filesaver Library
+	   }
 
+/*	   
+	  var canvas = $("#popChart")[0]; // gets canvas
+      var imgGetJpeg = canvas.toDataURL("image/jpeg");
+      $("#jpegSaveButtonContainer").html('<img src="' + imgGetJpeg + '"/>');
+	  var url = imgGetJpeg.replace(/^data:image\/[^;]+/, 'data:application/octet-stream');
+     window.open(url);
+*/		
+	}); 
+
+	
+	
+	
 	
 	
 	// onClick adding new fields to Form
@@ -66,7 +94,7 @@ $(document).ready(function(){
 				//$(wrapper).append(boxN); //adds input field box->WORKKS
 				
 				//adds input field box with animation
-				$(wrapper).stop().fadeOut(/* "slow" */ 200,function(){ $(this).append(boxN)}).fadeIn(500);
+				$(wrapper).stop().fadeOut(/* "slow" */200 ,function(){ $(this).append(boxN)}).fadeIn(400);
 				
 				if(screen.width <= 640){  //in mobile only
 				    //scroll down to last added / appended fields div
@@ -114,7 +142,7 @@ $(document).ready(function(){
 	
 	
 	
-	// Function that gets values from form and pass them to two arrays
+	// Function that gets values from form and pass them to two arrays + Run Chart draw + draw button to save image
 	// **************************************************************************************
     // **************************************************************************************
     //                                                                                     **
@@ -157,6 +185,10 @@ $(document).ready(function(){
 		  
 		  //scroll to chart
 	      scrollResults("#popChart");
+		  
+		  //Draw button to save Canvas to JPEG
+		  $("#jpegSaveButtonContainer").html("<br><br><a id='downloadLnk'><button class='btn' >Save as image</button></a>");
+		  
 
 	}
 	
@@ -169,6 +201,9 @@ $(document).ready(function(){
 	
 	
 	
+   
+	
+  
 	
 	
 	
@@ -194,8 +229,15 @@ $(document).ready(function(){
 	
 	function drawChart(arrayText, arrayNumb)
 	{
-		var barChart;
-	    var popCanvas = $("#popChart"); //gets the html canvas
+		//var barChart;
+		
+		//Mega ERROR was here - on Mouse move old chart was loading, to fix we clear the <div> with <canvas> and innerHTML <canvas> there agian
+		document.getElementById("chartContainer").innerHTML = '&nbsp;';
+        document.getElementById("chartContainer").innerHTML = ' <canvas id="popChart"  height="200px"></canvas>';
+        //var ctx = document.getElementById("mybarChart2").getContext("2d");
+		//Mega ERROR was here - on Mouse move old chart was loading
+		
+	    var popCanvas = $("#popChart"); //define the html canvas to use in chart
 		
 		/*
 		if (typeof barChart !== 'undefined') {
@@ -204,12 +246,21 @@ $(document).ready(function(){
          }
 		 */
 	
-	      barChart = new Chart(popCanvas, {
+	    //sets chart Name from user input to use in {var barChart = new Chart}, if input is empty sets default  value 
+		if($("#chartName").val()==""){
+			yourChartName = 'Your chart';
+		} else {
+			yourChartName = $("#chartName").val();
+		}
+		  
+		  
+		  // create/initialize Object {new Chart} from Library {Chart.js}, which draws the chart
+	      var barChart = new Chart(popCanvas, {
             type:  $("#chartType").val() , // value from SELECT // 'bar',
             data: {
                 labels: arrayText,//["China", "India", "United States", "Indonesia", "Brazil", "Pakistan", "Nigeria", "Bangladesh"],
                 datasets: [{
-                    label: 'Your chart',
+                    label: yourChartName , //'Your chart',
                     data:  arrayNumb,//[1379302771, 1281935911, 326625791, 260580739, 207353391, 204924861, 190632261, 157826578],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.6)',
@@ -225,7 +276,19 @@ $(document).ready(function(){
                         'rgba(153, 102, 255, 0.6)'
                     ]
               }]
-            }
+            }, //end data
+			
+			// Start Option, Mega Error was here, the minimal value was not displayed in chart because of missing {beginAtZero:true}
+		    options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true //!!!!!!!
+                      }
+                  }]
+               }
+		  }
+		  // end options
       });
 	   
 	}

@@ -1,7 +1,9 @@
 $(document).ready(function(){
 	
 	var wallURL = [
-	
+	    'http://www.prideinmcalester.com/wp-content/uploads/2016/10/webtreats-seamless-web-background-primary-green-pattern-2-flickr-94133.jpg', //green
+		'https://image.freepik.com/free-vector/yellow-swirls-pattern_1040-37.jpg',  //yellow
+		
 	    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQsQf2-zwuStKf6u2V2HE_nCy9rRvk5M8ag043FAenQbOrCXY3tA', //violat blocks
 		'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Color_icon_purple.svg/2000px-Color_icon_purple.svg.png', //same in HD
 		'http://www.sensationalcolor.com/wp-content/uploads/2009/12/purple350x350.jpg', //same HD
