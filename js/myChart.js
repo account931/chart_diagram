@@ -43,10 +43,14 @@ $(document).ready(function(){
 	       //Using Filesaver Library
 	       var canvas = document.getElementById("popChart"), ctx = canvas.getContext("2d");
            // draw to canvas...
-           canvas.toBlob(function(blob) {
-           saveAs(blob, "chartMine.jpeg");
-           }); 
+		   try {  //use try catch to show alert, when download is not working in samsung browser
+               canvas.toBlob(function(blob) {
+                   saveAs(blob, "chartMine.jpeg");
+               }); 
 	       //END Using Filesaver Library
+		   } catch(e){
+			   alert("Browser is not supported, use updated Chrome.");
+		   }
 	   }
 
 /*	   
