@@ -35,3 +35,16 @@ MEGA ERRORS FIX:
            canvas.toBlob(function(blob) {
            saveAs(blob, "chartMine.jpeg");
            }); 
+		   
+		   
+		   
+		   
+===================== Manual chart variant ===================================
+var valueArray = [5, 19, 8, 3]; 
+var max = Math.max.apply(Math, array); //get valueArray max value 
+
+for(i = 0; i < valueArray.length; i++){
+    //draw chart with height/width
+    var height = valueArray[i] / max * 100
+    var width = 100 / valueArray.length;
+}
